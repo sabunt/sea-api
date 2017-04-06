@@ -1,24 +1,20 @@
-# README
+Реализовать JSON REST API для получения ближайшей позиции к заданной позиции.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Позиции могут быть двух типов: позиция груза и позиция судна.
 
-Things you may want to cover:
+Позиция судна: должны иметь название, объём трюма (hold_capacity M³).
+Может иметь несколько портов открытия в разные несовпадающие даты . Например, судно вместимостью 10 000 M³ может быть 4 августа в порту Azov, либо же 7-го августа в порту Adler.
+Позиция груза: должна иметь порт открытия, дату открытия, объём (M³) и название груза.
+Порт: имеет геопозицию (lat, lng) и название.
+Алгоритм работы:
+Пользователь посылает запрос с ID позиции, а система находит ближайшую подходящую позицию противоположного типа c погрешность на объем ± 10%. В ответе получаем JSON c подходящей по дате и объему ближайшей противоположной по типу позицией.
 
-* Ruby version
+Для определения ближайшей позиции по координатам можно использовать гемы (Geocoder, Geokit и др.), если без них, то стоит почитать про Haversine formula (сделать на голом SQL, по желанию).
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Проверить
+git clone git@github.com:sabunt/seapi.git
+rails db:create
+rails db:migrate
+rails s
+http://localhost:3000/api/v1/7
+{"id":36,"port_name":"Skamania County","type":"Ship","name":"Foster","сapacity":9362,"date":"2017-04-15"}

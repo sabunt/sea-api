@@ -10,29 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403140614) do
+ActiveRecord::Schema.define(version: 20170404043927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "inports", force: :cascade do |t|
+    t.integer "position_id"
+    t.integer "port_id"
+    t.date    "date"
+    t.index ["port_id"], name: "index_inports_on_port_id", using: :btree
+    t.index ["position_id"], name: "index_inports_on_position_id", using: :btree
+  end
+
   create_table "ports", force: :cascade do |t|
-    t.float  "latitude"
-    t.float  "longitude"
-    t.string "name"
+    t.float  "lat"
+    t.float  "lng"
+    t.string "title"
   end
 
   create_table "positions", force: :cascade do |t|
     t.string  "name"
     t.integer "hold_capacity"
     t.boolean "type_cargo",    default: false
-  end
-
-  create_table "positions_in_port", force: :cascade do |t|
-    t.integer "positions_id"
-    t.integer "port_id"
-    t.date    "date"
-    t.index ["port_id"], name: "index_positions_in_port_on_port_id", using: :btree
-    t.index ["positions_id"], name: "index_positions_in_port_on_positions_id", using: :btree
   end
 
 end
