@@ -12,9 +12,15 @@
 Для определения ближайшей позиции по координатам можно использовать гемы (Geocoder, Geokit и др.), если без них, то стоит почитать про Haversine formula (сделать на голом SQL, по желанию).
 
 Проверить
-git clone git@github.com:sabunt/seapi.git
+
+git clone git@github.com:sabunt/sea-api.git
+
 rails db:create
+
 rails db:migrate
+
 rails s
+
 http://localhost:3000/api/v1/7
+
 {"id":36,"port_name":"Skamania County","type":"Ship","name":"Foster","сapacity":9362,"date":"2017-04-15"}
